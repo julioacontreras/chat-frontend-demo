@@ -1,0 +1,10 @@
+{
+    "endpoints": {
+        "getChat": "http://localhost:3000/get-chat/:contact-username",
+        "getContacts": "http://localhost:3000/get-contacts",
+        "login": "http://localhost:3000/login"
+    },
+    "socket": {
+        "url": "my-socket-url"
+    }
+}
