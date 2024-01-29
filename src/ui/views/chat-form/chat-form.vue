@@ -2,8 +2,8 @@
 import { defineProps, defineEmits } from 'vue'
 
 // types
-import type { MessageChat } from '@/ddd/chat/types/message-chat'
-import type { Contact } from '@/ddd/contacts/types/contact'
+import type { MessagePackage } from '@/ddd/modules/chat/types/message-package'
+import type { Contact } from '@/ddd/modules/contacts/types/contact'
 
 // components
 import CardContact from '@/ui/components/card-contact/card-contact.vue'
@@ -11,7 +11,7 @@ import ChaShowMessages from '@/ui/components/chat/chat-show-messages.vue'
 import ChaSendMessage from '@/ui/components/chat/chat-send-message.vue'
 
 interface Props {
-  messages: MessageChat[],
+  messages: MessagePackage[],
   usersStatus: Contact[],
   selected: number,
   onlyRead: boolean
@@ -20,10 +20,10 @@ interface Props {
 defineProps<Props>()
 
 const emit = defineEmits<{
-  (e: 'send-message', message: MessageChat): void
+  (e: 'send-message', message: MessagePackage): void
 }>()
 
-const sendMessage = (message: MessageChat) => {
+const sendMessage = (message: MessagePackage) => {
   emit('send-message', message)
 }
 </script>

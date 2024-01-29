@@ -2,8 +2,8 @@
   import { ref } from 'vue'
   import { RouterView } from 'vue-router'
 
+  // aggregators
   import { NotificationAggregator } from '@/ddd/modules/notification/aggregators/notification-aggregator'
-  import type { EventMessage } from '@/ddd/modules/notification/types/event-message'
  
   import Toast from '@/ui/components/toast/toast-component.vue'
  
@@ -16,7 +16,7 @@
   }
 
   const notificationAggregator = new NotificationAggregator()
-  notificationAggregator.onReceiveNotification((event: EventMessage) => {
+  notificationAggregator.onReceiveNotification((event) => {
     eventMessage.value = event.data.message
     isVisible.value = true
     typeToastMessage.value = event.data.type

@@ -75,6 +75,14 @@ export class MessageAggregator {
       }
     }
 
+    getBaseMessage(): BaseMessage {
+      const baseMessage = this.data.message as BaseMessage
+      return {
+        ...baseMessage,
+        time: this.getTime()
+      }
+    }
+
     createdNow(): void {
       this.data.createdAt = new Date().getTime()
     }

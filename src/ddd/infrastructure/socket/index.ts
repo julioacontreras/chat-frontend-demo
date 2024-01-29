@@ -13,7 +13,7 @@ export type EventSocket = Event & {
 
 export class Socket implements SocketAdapter {
   connect(urlServer: string): Promise<void> {
-    console.info(`Connected with server ${urlServer}`)
+    console.info(`Connected socket ${urlServer}`)
     return Promise.resolve()
   }
 

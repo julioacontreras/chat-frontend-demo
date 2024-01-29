@@ -1,3 +1,0 @@
-GET http://localhost:3000/get-user-status
-content-type: application/json
-authorization: Bearer 123

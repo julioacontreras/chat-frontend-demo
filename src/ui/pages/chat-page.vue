@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 
 // types
-import type { MessagePackage } from '@/ddd/modules/chat/types/message-chat'
-import type { Contact } from '@/ddd/modules/chat/types/contact'
+import type { MessagePackage } from '@/ddd/modules/chat/types/message-package'
+import type { Contact } from '@/ddd/modules/contacts/types/contact'
 
 // aggregator
 import { MessageAggregator } from '@/ddd/modules/chat/aggregators/message-aggregator'
@@ -61,7 +61,8 @@ socket.connect(Settings.socket.url)
 // receive message from contact
 socket.onReceiveMessage((conversationId: string, data: unknown): void => {
   const messagePackage = data as MessagePackage
-  if (messagePackage.message.type !== 'text') {
+  const messageAggregator = new MessageAggregator(messagePackage)
+  if (messageAggregator.getBaseMessage().type !== 'text') {
     return
   }
   store.addMessage(fakeReply())

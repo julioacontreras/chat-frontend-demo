@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useFileDialog } from '@vueuse/core'
 
-import type { MessagePackage } from '@/ddd/modules/chat/types/message-chat'
+import type { MessagePackage } from '@/ddd/modules/chat/types/message-package'
 
 import { MessageAggregator } from '@/ddd/modules/chat/aggregators/message-aggregator'
 
