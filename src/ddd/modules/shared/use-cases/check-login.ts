@@ -14,20 +14,23 @@ export async function checkLogin(username: string, password: string): Promise<bo
       authAggregator.setToken(response.data.token)
       authAggregator.setUsername(response.data.username)
       notificationAggregator.sendNotification({
-        message: 'Logueado con suceso!',
-        type: 'success'
+        message: '',
+        type: 'success',
+        isVisible: false
       })
     } else {
       notificationAggregator.sendNotification({
         message: 'No es psible efectuar el login',
-        type: 'danger'
+        type: 'danger',
+        isVisible: true
       })
     }
     return response.status === 200 ? true : false
   } catch (err) {
     notificationAggregator.sendNotification({
       message: 'Email o password no corresponde',
-      type: 'danger'
+      type: 'danger',
+      isVisible: true
     })
     return false
   }

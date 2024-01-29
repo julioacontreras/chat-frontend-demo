@@ -18,7 +18,7 @@
   const notificationAggregator = new NotificationAggregator()
   notificationAggregator.onReceiveNotification((event) => {
     eventMessage.value = event.data.message
-    isVisible.value = true
+    isVisible.value = event.data.isVisible
     typeToastMessage.value = event.data.type
   })
 
