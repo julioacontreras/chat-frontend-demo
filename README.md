@@ -34,9 +34,6 @@ Your task is to build a simple chat application in which people can send and rec
 - Utilize websockets/socket.io for real-time message communication between clients.
 - Containerize the project.
 
-# Questions and Assistance
-If you have any questions or need assistance at any stage of this assessment, please feel free to reach out to dev@saysimple.com.
-
 # Types
 ```
 type BaseMessage = {
