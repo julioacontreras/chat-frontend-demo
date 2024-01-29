@@ -1,26 +1,29 @@
 <script setup lang="ts">
-    import { defineProps, watch, ref } from 'vue' // nextTick
-    
-    import type { MessagePackage } from '@/ddd/modules/chat/types/message-package'
+    import { watch, ref } from 'vue' 
+
+    // store
+    import { useMessageStore } from '@/stores/message'
+
+    // components
     import ItemMessage from './item-message.vue'
 
-    interface Props {
-      messages: MessagePackage[]
-    }
+    type FollowScroll = { scrollIntoView: ( options: Record<string, string>) => void }
     
-    const anchor = ref('anchor')
-    const props = defineProps<Props>()
-    watch(props.messages, () => {
+    const store = useMessageStore()
+    const anchor = ref(null)
+
+    watch(store.getMessages, () => {
       setTimeout(() => {
-        anchor.value.scrollIntoView({ block: 'end', behavior: 'smooth' });        
-      }, 100)
+        const scroll = (anchor.value as unknown as FollowScroll)
+        scroll.scrollIntoView({ block: 'end', behavior: 'smooth', inline: 'nearest' });        
+      }, 200)
     })      
 </script>
 
 <template>
-  <section class="flex flex-col gap-2 w-full p-2 overflow-auto h-chat">
+  <section class="flex flex-col gap-2 w-full p-2 overflow-auto h-chat smoth-scroll">
     <ItemMessage 
-      v-for="(message, index) in messages" 
+      v-for="(message, index) in store.getMessages.value" 
       :key="`item-message-${index}`" 
       :data="message"
     />
@@ -31,5 +34,9 @@
 <style>
 .h-chat {
   height: 80vh;
+}
+
+.smoth-scroll {
+  scroll-behavior: smooth;
 }
 </style>

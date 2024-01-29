@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, ref } from 'vue'
 
 // types
 import type { MessagePackage } from '@/ddd/modules/chat/types/message-package'
@@ -11,7 +11,6 @@ import ChaShowMessages from '@/ui/components/chat/chat-show-messages.vue'
 import ChaSendMessage from '@/ui/components/chat/chat-send-message.vue'
 
 interface Props {
-  messages: MessagePackage[],
   usersStatus: Contact[],
   selected: number,
   onlyRead: boolean
@@ -19,9 +18,11 @@ interface Props {
 
 defineProps<Props>()
 
+const showMessages = ref(null)
 const emit = defineEmits<{
   (e: 'send-message', message: MessagePackage): void
 }>()
+
 
 const sendMessage = (message: MessagePackage) => {
   emit('send-message', message)
@@ -32,7 +33,7 @@ const sendMessage = (message: MessagePackage) => {
   <div class="flex w-full">
     <div class="flex flex-col w-full relative">
       <CardContact v-if="usersStatus.length > 0" :contact="usersStatus[selected]" />
-      <ChaShowMessages :messages="messages" />
+      <ChaShowMessages ref="showMessages" />
       <ChaSendMessage v-if="!onlyRead" class="absolute bottom-0" @send-message="sendMessage" />
     </div>
   </div>

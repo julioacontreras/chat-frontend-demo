@@ -12,6 +12,7 @@ export const useMessageStore = defineStore('message', () => {
 
   function addMessage(message: MessagePackage) {
     messages.value.push(message)
+    messages.value = [...messages.value]
   }
 
   const getMessages = computed(() => messages)

@@ -17,6 +17,9 @@ import SideBar from '@/ui/views/side-bar/side-bar.vue'
 import ContactList from '@/ui/views/contact-list/contact-list.vue'
 import ChatForm from '@/ui/views/chat-form/chat-form.vue'
 
+// events
+import { fakeReply } from '@/ddd/modules/chat/events/faker-reply'
+
 // config
 import Settings from '@/config/settings.json'
 
@@ -34,26 +37,11 @@ const contacts = ref<Contact[]>([])
 const selected = ref(0)
 const onlyRead = ref<boolean>(authAggregator.getRole() === 'observer' )
 
-
 const updateChat = async () => {
   useChat((dataContacts: Contact[], dataMessages: MessagePackage[]) => {
     contacts.value = dataContacts
     store.setMessages(dataMessages)
   }, selected.value)
-}
-
-function getRandomInt(max: number) {
-  return Math.floor(Math.random() * max);
-}
-
-function fakeReply(): MessagePackage {
-  const messageAggregator = new MessageAggregator(null)
-  messageAggregator.setSide('left')
-  messageAggregator.createdNow()
-  const answers = ['ohh', 'I understand', 'oh my god!']
-  messageAggregator.setTextMessage(answers[getRandomInt(answers.length)])
-  messageAggregator.sent()
-  return messageAggregator.getMessage()
 }
 
 socket.connect(Settings.socket.url)
@@ -97,7 +85,7 @@ updateChat()
       <SideBar />
       <ContactList :contacts="contacts" :selected="selected" @select-contact="selectContact" />
     </Stack>
-    <ChatForm :messages="store.getMessages.value" :usersStatus="contacts" :selected="selected"
+    <ChatForm :usersStatus="contacts" :selected="selected"
       @send-message="addMessage" :onlyRead="onlyRead" />
   </div>
 </template>
