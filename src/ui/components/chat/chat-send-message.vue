@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { defineEmits, ref } from 'vue'
 import { useFileDialog } from '@vueuse/core'
 
 import type { MessagePackage } from '@/ddd/modules/chat/types/message-package'

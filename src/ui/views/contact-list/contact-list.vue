@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { defineProps } from 'vue'
+    import { defineEmits, defineProps } from 'vue'
     import type { Contact } from '@/ddd/modules/contacts/types/contact'
 
     // props
